@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+    body {
+
+      font-family: 'Roboto', sans-serif;
+
+      font-size: 20px;
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+      background: #323445;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+    }
+
+    body:after {
+
+      content: '';
+
+      background: linear-gradient(to right, #FBFF00, #FF004A);
+
+      position: absolute;
+
+      height: 100%;
+
+      width: 100%;
+
+      top: 0;
+
+      left: 0;
+
+      clip-path: circle(26% at right 30%);
+
+      z-index: -1;
+
+    }
+
+    body:before {
+
+      content: '';
+
+      background: linear-gradient(to right, #00FFF7, #0043FF);
+
+      position: absolute;
+
+      height: 100%;
+
+      width: 100%;
+
+      top: 0;
+
+      left: 0;
+
+      clip-path: circle(10% at 10% 10%);
+
+      z-index: -1;
+
+    }
+
+    section {
+
+      background: rgba(255, 255, 255, 0.2);
+
+      height: 650px;
+
+      width: 600px;
+
+      margin: 60px auto;
+
+      padding: 20px;
+
+      backdrop-filter: blur(6px);
+
+      border-radius: 20px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.8);
+
+      border-left: 1px solid rgba(255, 255, 255, 0.8);
+
+      color: rgba(255, 255, 255, 0.9);
+
+      box-shadow: 10px 20px 50px rgba(0, 0, 0, 0.4)
+    }
+
+    .formbox {
+
+      width: 100%;
+
+      position: relative;
+
+      margin-top: 50px;
+
+    }
+
+    .content {
+
+      display: flex;
+
+      gap: 20px;
+
+    }
+
+    .inputbox {
+
+      display: flex;
+
+      flex-direction: column;
+
+      width: 50%;
+
+    }
+
+    .content2 .inputbox {
+
+      width: 100%
+    }
+
+    input {
+
+      height: 40px;
+
+      margin-bottom: 20px;
+
+      border: none;
+
+      outline-color: none;
+
+      padding-left: 10px;
+
+      font-family: 'roboto';
+
+      font-weight: bold;
+
+      background: rgba(255, 255, 255, 0.4);
+
+      backdrop-filter: blur(5px);
+
+      border-radius: 10px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.8);
+
+      border-left: 1px solid rgba(255, 255, 255, 0.8);
+
+
+
+    }
+
+    ::placeholder {
+
+      font-weight: 300;
+
+      color: #404142;
+
+    }
+
+    textarea {
+
+      height: 150px;
+
+      margin-bottom: 30px;
+
+      padding-top: 10px;
+
+      padding-left: 10px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.8);
+
+      border-left: 1px solid rgba(255, 255, 255, 0.8);
+
+      background: rgba(255, 255, 255, 0.4);
+
+      font-weight: bold;
+
+      border-radius: 10px;
+
+    }
+
+    .btn {
+
+      width: 150px;
+
+      background: #FF004D;
+
+      border: none;
+
+      color: #FFFFFF;
+
+      font-family: 'roboto';
+
+      outline: none;
+
+    }
+
+    span {
+
+      margin-bottom: 10px;
+
+      color: #fff
+    }
+
+    .icon {
+
+      text-align: center;
+
+      color: #fff;
+
+      font-size: 40px;
+
+    }
+
+    ion-icon {
+
+      padding: 20px
+    }
+
+    h1 {
+
+      position: relative;
+
+      color: #fff
+    }
+
+    h1:before {
+
+      content: '';
+
+      position: absolute;
+
+      left: 0;
+
+      bottom: -10px;
+
+      width: 100px;
+
+      height: 5px;
+
+      background: #fff
+    }
+
+    .animate .squire {
+
+      backdrop-filter: blur(6px);
+
+      border-radius: 20px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.8);
+
+      border-left: 1px solid rgba(255, 255, 255, 0.8);
+
+      color: rgba(255, 255, 255, 0.9);
+
+      box-shadow: 10px 20px 50px rgba(0, 0, 0, 0.1);
+
+      background: rgba(255, 255, 255, 0.2);
+
+      position: absolute;
+
+      animation: animate 6s linear infinite;
+
+    }
+
+    .squire:nth-child(1) {
+
+      top: 10px;
+
+      right: 90px;
+
+      width: 100px;
+
+      height: 100px;
+
+      animation-delay: -1s
+    }
+
+    .squire:nth-child(2) {
+
+      top: 600px;
+
+      left: 90px;
+
+      width: 200px;
+
+      height: 150px;
+
+      z-index: -1;
+
+      animation-delay: -2s;
+
+    }
+
+    .squire:nth-child(3) {
+
+      top: 710px;
+
+      left: 720px;
+
+      width: 200px;
+
+      height: 150px;
+
+      z-index: 1
+    }
+
+    @keyframes animate {
+
+      0%,
+      100% {
+
+        transform: translateY(-40%)
+      }
+
+      50% {
+
+        transform: translateY(40%)
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <link rel="stylesheet" href="style.css">
+
+
+
+
+
+  <div class="animate">
+
+    <div class="squire" style="--i:0"></div>
+
+    <div class="squire" style="--i:1"></div>
+
+    <div class="squire" style="--i:2"></div>
+
+    <div class="squire" style="--i:3"></div>
+
+  </div>
+
+  <section>
+
+    <div class="container">
+
+      <h1>Contact Us</h1>
+
+      <div class="formbox">
+
+        <form action="">
+
+          <div class="content">
+
+            <div class="inputbox">
+
+              <span>First Name</span>
+
+              <input type="text" name="" id="" placeholder="praz hub">
+
+            </div>
+
+            <div class="inputbox">
+
+              <span>First Name</span>
+
+              <input type="text" name="" id="" placeholder="praz">
+
+            </div>
+
+          </div>
+
+          <div class="content">
+
+            <div class="inputbox">
+
+              <span>Email</span>
+
+              <input type="email" name="" id="" placeholder="prazhub@email.com">
+
+            </div>
+
+            <div class="inputbox">
+
+              <span>Mobile</span>
+
+              <input type="number" name="" id="" placeholder="123456789">
+
+            </div>
+
+          </div>
+
+          <div class="content2">
+
+            <div class="inputbox">
+
+              <textarea placeholder="Hi... Write your message here !"></textarea>
+
+            </div>
+
+          </div>
+
+          <div class="content2">
+
+            <div class="inputbox">
+
+              <input class="btn" type="submit" value="Send">
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <div class="icon">
+
+      <ion-icon name="logo-instagram"></ion-icon>
+
+      <ion-icon name="logo-facebook"></ion-icon>
+
+      <ion-icon name="logo-twitter"></ion-icon>
+
+    </div>
+
+  </section>
+
+  <!-- Project -->
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script src="main.js"></script>
+
+
+</body>
+
+</html>

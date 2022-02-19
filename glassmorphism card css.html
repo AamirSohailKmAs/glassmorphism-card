@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /******* RESETS *******/
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+      outline: none;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img,
+    picture,
+    video,
+    canvas,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    input,
+    button,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      overflow-wrap: break-word;
+    }
+
+    #root,
+    #__next {
+      isolation: isolate;
+    }
+
+
+    /***** VARIABLES *****/
+
+    :root {
+      --clr-black: 212 15% 22%;
+      --clr-grey: 205 16% 27%;
+      --clr-grey-alt: 205 16% 45%;
+      --clr-accent: 183 100% 35%;
+      --clr-error: 53 100% 62%;
+      --clr-white: 0 0% 93%;
+
+      --ff-main: 'Nunito', sans-serif;
+
+      --spacer: 1rem;
+
+    }
+
+    /***** STYLING ******/
+
+    body {
+      background-color: hsl(var(--clr-black));
+      color: hsl(var(--clr-white));
+      font-family: var(--ff-main);
+      font-weight: 300;
+      display: -webkit-flex;
+      display: flex;
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: 2rem;
+    }
+
+
+    main {
+      max-width: 25rem;
+      margin: auto;
+      position: relative;
+      text-align: center;
+    }
+
+    .contact-form-wrapper {
+      padding: 30px 35px 35px;
+      display: grid;
+      justify-items: center;
+      z-index: 2;
+      position: relative;
+      margin-inline: 15px;
+
+
+      /** GLASSMORPHISM **/
+
+      background-color: hsl(var(--clr-grey-alt) /.80);
+      border: 1px solid hsl(var(--clr-white) /.3);
+      border-radius: 8px;
+      box-shadow: 0 5px 20px 0 hsl(212 15% 15%);
+      -o-transition: all .4s;
+      -moz-transition: all .4s;
+      -webkit-transition: all .4s;
+      transition: all .4s;
+    }
+
+    @supports (backdrop-filter: blur(15px)) {
+      .contact-form-wrapper {
+        background-color: hsl(var(--clr-white) /.12);
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+      }
+    }
+
+    .contact-form-wrapper.focused-wrapper {
+      box-shadow: 0 40px 40px 0 hsl(212 15% 12%);
+      -ms-transform: scale(1.01);
+      -moz-transform: scale(1.01);
+      -webkit-transform: scale(1.01);
+      transform: scale(1.01);
+    }
+
+    form {
+      display: grid;
+      --spacer: 2rem;
+      gap: var(--spacer);
+      padding-top: var(--spacer);
+      width: 100%;
+    }
+
+    .label-transitions {
+      position: relative;
+    }
+
+
+    .label-transitions label {
+      position: absolute;
+      top: 10px;
+      left: 3px;
+      cursor: text;
+
+      -ms-transform: scale(1.1) translateY(0);
+      -moz-transform: scale(1.1) translateY(0);
+      -webkit-transform: scale(1.1) translateY(0);
+      transform: scale(1.1) translateY(0);
+
+      -o-transform-origin: left;
+      -ms-transform-origin: left;
+      -moz-transform-origin: left;
+      -webkit-transform-origin: left;
+      transform-origin: left;
+
+      -o-transition: all .3s ease;
+      -moz-transition: all .3s ease;
+      -webkit-transition: all .3s ease;
+      transition: all .3s ease;
+    }
+
+    .label-transitions label.focused-label {
+      -ms-transform: scale(.9) translateY(-120%);
+      -moz-transform: scale(.9) translateY(-120%);
+      -webkit-transform: scale(.9) translateY(-120%);
+      transform: scale(.9) translateY(-120%);
+    }
+
+
+    form input[type="text"],
+    form input[type="email"],
+    form textarea {
+      width: 100%;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid hsl(var(--clr-white));
+      height: 40px;
+      color: hsl(var(--clr-white));
+      padding-top: 10px;
+    }
+
+
+    .label-transitions:hover input[type="text"],
+    .label-transitions:hover input[type="email"],
+    .label-transitions:hover textarea,
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form textarea:focus {
+      border-bottom-width: 2px;
+    }
+
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: hsl(var(--clr-accent) 0);
+      color: hsl(var(--clr-white));
+      border-radius: 8px;
+      border: 1px solid hsl(var(--clr-white));
+      padding: 6px 0;
+      margin-top: 10px;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover,
+    input[type="submit"]:focus {
+      background-color: hsl(var(--clr-accent) /.65);
+      outline: 1px solid hsl(var(--clr-white));
+      -ms-transform: scale(1.03);
+      -moz-transform: scale(1.03);
+      -webkit-transform: scale(1.03);
+      transform: scale(1.03);
+    }
+
+    @media (prefers-reduced-motion) {
+
+      .contact-form-wrapper.focused-wrapper {
+        box-shadow: 0 5px 20px 0 hsl(212 15% 15%);
+        -ms-transform: scale(1);
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+
+      .label-transitions label {
+        -o-transition: all 0s;
+        -moz-transition: all 0s;
+        -webkit-transition: all 0s;
+        transition: all 0s;
+      }
+    }
+
+    /**** BG CIRCLES ****/
+
+    .circle {
+      width: 200px;
+      height: 200px;
+      background-color: hsl(var(--clr-accent) /.65);
+      border-radius: 50%;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+    }
+
+
+    .circle.first {
+      -ms-transform: translate(-50%, -120%);
+      -moz-transform: translate(-50%, -120%);
+      -webkit-transform: translate(-50%, -120%);
+      transform: translate(-50%, -120%);
+    }
+
+    .circle.second {
+      display: none;
+    }
+
+    @media (min-width: 35.6em) {
+      .circle.first {
+        -ms-transform: translate(-140%, -140%);
+        -moz-transform: translate(-140%, -140%);
+        -webkit-transform: translate(-140%, -140%);
+        transform: translate(-140%, -140%);
+      }
+
+      .circle.second {
+        display: block;
+        -ms-transform: translate(40%, 40%);
+        -moz-transform: translate(40%, 40%);
+        -webkit-transform: translate(40%, 40%);
+        transform: translate(40%, 40%);
+      }
+    }
+
+    /******** FORM VALIDATION *******/
+
+    .validation {
+      text-align: left;
+      color: hsl(var(--clr-error));
+      position: absolute;
+    }
+
+    @media (max-width: 341px) {
+      .validation {
+        position: relative;
+      }
+    }
+
+    .fas {
+      padding: 5px;
+      display: none !important;
+    }
+
+    .validation span {
+      display: none;
+      font-size: 15px;
+    }
+
+    .error span {
+      display: inline;
+    }
+
+    .error input {
+      border-color: hsl(var(--clr-error)) !important;
+    }
+
+    .error .validation .fa-exclamation {
+      display: inline-block !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <main class="wrapper">
+
+      <section class="contact-form-wrapper">
+        <h1>Praz Hub</h1>
+        <p aria-hidden="true">
+        <form action="" id="contact-form">
+          <div class="label-transitions">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-input" aria-required="false">
+            <div class="validation">
+              <i class="fas fa-exclamation" aria-hidden="true"></i>
+              <span class="msg">Error message</span>
+            </div>
+          </div>
+
+          <div class="label-transitions">
+            <label for="email">Email <span aria-hidden="true">*</span></label>
+            <input type="text" id="email" class="form-input" aria-required="true">
+            <div class="validation">
+              <i class="fas fa-exclamation" aria-hidden="true"></i>
+              <span class="msg">Error message</span>
+            </div>
+          </div>
+
+          <div class="label-transitions">
+            <label for="message">Message <span aria-hidden="true">*</span></label>
+            <textarea id="message" class="form-input" aria-required="true" rows="1"></textarea>
+            <div class="validation">
+              <i class="fas fa-exclamation" aria-hidden="true"></i>
+              <span class="msg">Error message</span>
+            </div>
+          </div>
+
+          <div>
+            <input type="submit" id="submit-btn" value="SEND">
+          </div>
+        </form>
+      </section>
+
+      <section class="deco">
+        <div class="circle first" aria-hidden="true"></div>
+        <div class="circle second" aria-hidden="true"></div>
+      </section>
+    </main>
+
+    <script src="index.js"></script>
+    <script src="https://kit.fontawesome.com/103e73500c.js" crossorigin="anonymous"></script>
+    <script>
+      <body>
+        <main class="wrapper">
+
+          <section class="contact-form-wrapper">
+            <h1>Praz Hub</h1>
+            <p aria-hidden="true">
+              <form action="" id="contact-form">
+                <div class="label-transitions">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" class="form-input" aria-required="false">
+                    <div class="validation">
+                      <i class="fas fa-exclamation" aria-hidden="true"></i>
+                      <span class="msg">Error message</span>
+                    </div>
+                </div>
+
+                <div class="label-transitions">
+                  <label for="email">Email <span aria-hidden="true">*</span></label>
+                  <input type="text" id="email" class="form-input" aria-required="true">
+                    <div class="validation">
+                      <i class="fas fa-exclamation" aria-hidden="true"></i>
+                      <span class="msg">Error message</span>
+                    </div>
+                </div>
+
+                <div class="label-transitions">
+                  <label for="message">Message <span aria-hidden="true">*</span></label>
+                  <textarea id="message" class="form-input" aria-required="true" rows="1"></textarea>
+                  <div class="validation">
+                    <i class="fas fa-exclamation" aria-hidden="true"></i>
+                    <span class="msg">Error message</span>
+                  </div>
+                </div>
+
+                <div>
+                  <input type="submit" id="submit-btn" value="SEND">
+                </div>
+              </form>
+          </section>
+
+          <section class="deco">
+            <div class="circle first" aria-hidden="true"></div>
+            <div class="circle second" aria-hidden="true"></div>
+          </section>
+        </main>
+
+        <script src="index.js"></script>
+    <script src="https://kit.fontawesome.com/103e73500c.js" crossorigin="anonymous"></script>
+
+    </script>
+  </body>
+
+</html>
